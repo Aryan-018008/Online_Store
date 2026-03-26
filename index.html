@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xyz-HomePage</title>
+    
+</head>
+<body>
+    <!-- navbar -->
+     <nav>
+
+     </nav>
+
+
+     <!-- Home -->
+      <input type="search" placeholder="Browse Product Here">
+      
+
+     <!-- Product Card -->
+       <h2>Product List</h2>
+
+       
+       <card>
+           <p id="image"></p>
+           <p id="name"></p>
+           <p id="price"></p>
+           <p id="rating"></p>
+    </card>
+       <button onclick="cardDisplay()">Add to Cart</button>
+
+
+
+    <!-- About -->
+     <section id="about" class="about">
+        <h2>About Xyz</h2>
+        <p>Xyz is a leading digital platform for online shopping.It aims to fullfill user requirement at their door step</p>
+     </section>
+
+
+
+    <!-- Contact Us -->
+     <section id="contact" class="contact">
+     <h2>Contact Us</h2>
+     <p>Contact No- 1800 568 5932</p>
+     <p>Email- service@Xyz.com</p>
+     <p>Website -  www.xyz.com</p>
+
+     <p>Social Media</p>
+     <a href="www.instagram.com" target="_blank">Instagram</a>
+     <a href="www.facebook.com" target="_blank">Facebook</a>
+     <a href="www.x.com" target="_blank">X</a>
+
+     <p>For Quick updates</p>
+     <a href="www.whatsapp.com" target="_blank">Whatsapp</a>
+     <a href="www.telegram.com" target="_blank">telegram</a>
+     </section>
+
+
+    <!-- Footer -->
+     <footer>
+        Copyright 2026 Xyz |All Rights Reserved.
+     </footer>
+   
+    
+</body>
+</html>
+
+<script >
+    const product={
+        image:"",
+        name :"Shirt",
+        Price : "1200",
+        Rating : "3-Star"
+}
+   document.getElementById("image").innerHTML=
+   document.getElementById("name").innerHTML=product.name
+   document.getElementById("price").innerHTML=product.Price
+   document.getElementById("rating").innerHTML=product.Rating
+
+
+    function cardDisplay(){
+    alert("Product added to cart successfully")
+
+    }
+</script>
+
+</body>
+
+</html>
