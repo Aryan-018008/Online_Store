@@ -344,35 +344,70 @@ function displayProducts(data) {
 
     const inCart = cart.find(item => item.id === product.id)
 
+    // const card = `
+    // <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition">
+
+    //   <div class="overflow-hidden rounded-xl">
+    //     <img src="${product.image}" 
+    //       class="w-full h-48 object-cover">
+    //   </div>
+
+    //   <h2 class="mt-3 font-semibold text-[#073a7a]">${product.title}</h2>
+
+    //   <div class="flex justify-between items-center mt-1">
+    //     <p class="font-bold text-gray-800">₹${Math.round(product.price * INR_RATE)}</p>
+    //     <span class="text-sm text-yellow-500">⭐ ${product.rating.rate}</span>
+    //   </div>
+
+    //   <button 
+    //     onclick='addToCart(${JSON.stringify(product)})'
+    //     type="button"
+    //     class="mt-3 w-full py-2 rounded-lg transition
+    //     ${inCart 
+    //       ? "bg-green-500 text-white cursor-not-allowed" 
+    //       : "bg-[#073a7a] text-white hover:bg-[#052c5c]"}"
+    //     ${inCart ? "disabled" : ""}
+    //   >
+    //     ${inCart ? "Added ✅" : "Add to Cart"}
+    //   </button>
+
+    // </div>
+    // `
     const card = `
-    <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition">
+<div class="bg-white rounded-2xl p-4 shadow-sm 
+            transition duration-300 ease-in-out
+            hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group">
 
-      <div class="overflow-hidden rounded-xl">
-        <img src="${product.image}" 
-          class="w-full h-48 object-cover">
-      </div>
+  <div class="overflow-hidden rounded-xl">
+    <img src="${product.image}" 
+      class="w-full h-48 object-cover transition duration-300 group-hover:scale-110">
+  </div>
 
-      <h2 class="mt-3 font-semibold text-[#073a7a]">${product.title}</h2>
+  <h2 class="mt-3 font-semibold text-[#073a7a] group-hover:text-[#052c5c] transition">
+    ${product.title}
+  </h2>
 
-      <div class="flex justify-between items-center mt-1">
-        <p class="font-bold text-gray-800">₹${Math.round(product.price * INR_RATE)}</p>
-        <span class="text-sm text-yellow-500">⭐ ${product.rating.rate}</span>
-      </div>
+  <div class="flex justify-between items-center mt-1">
+    <p class="font-bold text-gray-800">
+      ₹${Math.round(product.price * INR_RATE)}
+    </p>
+    <span class="text-sm text-yellow-500">⭐ ${product.rating.rate}</span>
+  </div>
 
-      <button 
-        onclick='addToCart(${JSON.stringify(product)})'
-        type="button"
-        class="mt-3 w-full py-2 rounded-lg transition
-        ${inCart 
-          ? "bg-green-500 text-white cursor-not-allowed" 
-          : "bg-[#073a7a] text-white hover:bg-[#052c5c]"}"
-        ${inCart ? "disabled" : ""}
-      >
-        ${inCart ? "Added ✅" : "Add to Cart"}
-      </button>
+  <button 
+    onclick='addToCart(${JSON.stringify(product)})'
+    type="button"
+    class="mt-3 w-full py-2 rounded-lg transition duration-300
+    ${inCart 
+      ? "bg-green-500 text-white cursor-not-allowed" 
+      : "bg-[#073a7a] text-white hover:bg-[#052c5c] hover:scale-105 active:scale-95"}"
+    ${inCart ? "disabled" : ""}
+  >
+    ${inCart ? "Added ✅" : "Add to Cart"}
+  </button>
 
-    </div>
-    `
+</div>
+`
 
     container.innerHTML += card
   })
