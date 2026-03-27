@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xyz Store</title>
+  <title>EasyShop-Online Shopping</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body class="bg-gray-50 text-gray-800">
@@ -14,7 +16,7 @@
 <header class="sticky top-0 z-50 bg-[#073a7a] text-white shadow-md">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
 
-    <h1 class="text-2xl font-bold">Xyz</h1>
+    <h1 class="text-2xl font-bold">EasyShop</h1>
 
     <nav class="class=hidden md:flex gap-8 text-lg font-semibold">
       <a href="#home" class="hover:text-gray-300">Home</a>
@@ -89,23 +91,75 @@
 </div>
 
 <!--  About Us-->
-<section id="about" class="max-w-4xl mx-auto px-4 py-12 text-center">
-  <h2 class="text-2xl font-bold text-[#073a7a] mb-3">About Us</h2>
-  <p class="text-gray-600">
-    Xyz Store is your one-stop destination for premium products.
+<section id="about" class="max-w-4xl mx-auto px-6 py-16 text-center">
+  <h2 class="text-3xl md:text-4xl font-bold text-[#073a7a] mb-4">
+    About EasyShop
+  </h2>
+  
+  <p class="text-gray-600 text-lg leading-relaxed">
+    EasyShop is your one-stop destination for premium products at affordable prices.
+    We bring you a curated collection of fashion, electronics, and everyday essentials
+    with a seamless shopping experience. Quality, convenience, and customer satisfaction
+    are at the heart of everything we do.
   </p>
 </section>
 
 <!-- contact us -->
-<section id="contact" class="bg-[#073a7a] text-white py-12 text-center">
-  <h2 class="text-2xl font-bold mb-3">Contact Us</h2>
-  <p>Email: service@xyz.com</p>
-  <p>Phone: +91 6542156311</p>
+<section id="contact" class="bg-[#073a7a] text-white py-14 px-6">
+  <h2 class="text-3xl font-bold text-center mb-10">Contact Us</h2>
+
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+    
+    <!-- LEFT SIDE -->
+    <div class="text-left space-y-3">
+      <h3 class="text-xl font-semibold mb-4">Get in Touch</h3>
+      <p>Email: service@easyshop.com</p>
+      <p>Phone: +91 6542156311</p>
+      <p>Website: www.easyshop.com</p>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="text-center md:text-left">
+      
+      <h3 class="text-xl font-semibold mb-4">Connect With Us</h3>
+
+      <!-- Social Media -->
+      <div class="flex md:justify-start justify-center gap-6 text-2xl mb-6">
+        <a href="https://www.facebook.com/" target="_blank" class="hover:text-gray-300 transition">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="hover:text-gray-300 transition">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://x.com/" target="_blank" class="hover:text-gray-300 transition">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      </div>
+
+      <!-- CTA -->
+      <p class="text-lg font-semibold mb-3">
+        📢 For quick sales updates
+      </p>
+
+      <div class="flex md:justify-start justify-center gap-4">
+        <a href="https://web.whatsapp.com/" target="_blank"
+           class="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-full text-xl transition">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://web.telegram.org/" target="_blank"
+           class="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-full text-xl transition">
+          <i class="fa-brands fa-telegram"></i>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 <!-- footer -->
 <footer class="text-center py-6 bg-[#052c5c] text-gray-300">
-  © 2026 Xyz | All Rights Reserved
+  © 2026 EasyShop | All Rights Reserved.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!--Sweet Alert  -->
