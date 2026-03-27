@@ -10,21 +10,22 @@
 
 <body class="bg-gray-50 text-gray-800">
 
-<!-- 🔥 NAVBAR -->
+<!-- Navbar -->
 <header class="sticky top-0 z-50 bg-[#073a7a] text-white shadow-md">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
 
     <h1 class="text-2xl font-bold">Xyz</h1>
 
-    <nav class="hidden md:flex gap-6 text-sm font-medium">
+    <nav class="class=hidden md:flex gap-8 text-lg font-semibold">
       <a href="#home" class="hover:text-gray-300">Home</a>
       <a href="#about" class="hover:text-gray-300">About</a>
       <a href="#contact" class="hover:text-gray-300">Contact</a>
     </nav>
 
-    <button class="bg-white text-[#073a7a] px-4 py-2 rounded-full font-medium hover:bg-gray-200">
-      Cart
-    </button>
+    <button id="cartBtn"
+  class="bg-white text-[#073a7a] px-4 py-2 rounded-full font-medium hover:bg-gray-200 flex items-center gap-2">
+  🛒 Cart (<span id="cartCount">0</span>)
+   </button>
 
   </div>
 </header>
@@ -52,30 +53,37 @@
 
 </section>
 
+
 <!-- filter Bar-->
-<div class="flex flex-wrap gap-3 justify-center">
+<div class="max-w-5xl mx-auto bg-white p-4 rounded-2xl ">
 
-  <!-- Category -->
-  <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition">
-    All
-  </button>
+  <div class="flex flex-wrap gap-3 justify-center">
 
-  <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition">
-    Electronics
-  </button>
+    <!-- Category -->
+    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="all">All</button>
 
-  <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition">
-    Fashion
-  </button>
+    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="electronics">Electronics</button>
 
-  <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition">
-    Books
-  </button>
+    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="men's clothing">Fashion</button>
 
-  <!-- Dropdowns -->
-  <select class="px-4 py-2 rounded-full border border-gray-300 focus:ring-[#073a7a]">
-    <option>All Prices</option>
-  </select>
+    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="jewelery">Accessories</button>
+
+    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="women's clothing">Women</button>
+
+    <!-- Price -->
+    <select 
+  id="priceFilter" 
+  class="appearance-none px-4 py-2 rounded-full border border-gray-300 
+         text-gray-700 bg-white shadow-sm 
+         focus:ring-2 focus:ring-[#073a7a] focus:border-[#073a7a]
+         cursor-pointer transition">
+      <option value="all">All Prices</option>
+      <option value="low">Below ₹1000</option>
+      <option value="mid">₹1000 - ₹3000</option>
+      <option value="high">Above ₹3000</option>
+    </select>
+
+  </div>
 
 </div>
 
@@ -104,6 +112,7 @@
   © 2026 Xyz | All Rights Reserved
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!--Sweet Alert  -->
 <script src="script.js"></script>
 </body>
 </html>
