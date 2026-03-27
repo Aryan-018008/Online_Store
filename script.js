@@ -160,7 +160,7 @@
 
 //   if (cart.length === 0) {
 //     Swal.fire("Cart is Empty 🛒")
-//       // text: "Start shopping 😄",
+//       // text: "Start shopping ",
 //       // icon: "info"
     
 //     return
@@ -410,26 +410,137 @@ function updateCartUI() {
 }
 
 // ================= OPEN CART =================
-function openCart() {
+// function openCart() {
 
+//   if (cart.length === 0) {
+//     Swal.fire("Cart is Empty 🛒",
+//       "Start Shopping 😄"
+//     )
+//     return
+//   }
+
+//   Swal.fire({
+//     title: "Your Cart 🛒",
+//     html: `
+//       <div id="cartContent" class="text-left max-h-80 overflow-y-auto"></div>
+//       <div class="mt-4 text-right font-bold">
+//         Total: <span id="cartTotal"></span>
+//       </div>
+//     `,
+//     width: 500,
+//     confirmButtonText: "Pay Now 💳"
+//   })
+
+//   setTimeout(renderCart, 100)
+// }
+
+// function openCart() {
+//   if (cart.length === 0) {
+//     Swal.fire({
+//       title: "Cart is Empty 🛒",
+//       text: "Start Shopping 😄",
+//       icon: "info",
+//       confirmButtonText: "Back to Homepage"
+//     }).then(() => {
+//       // Redirect or reload homepage
+//       window.location.href = "/"; // replace with your homepage URL if needed
+//     });
+//     return;
+//   }
+
+//   Swal.fire({
+//     title: "Your Cart 🛒",
+//     html: `
+//       <div id="cartContent" class="text-left max-h-80 overflow-y-auto"></div>
+//       <div class="mt-4 text-right font-bold">
+//         Total: <span id="cartTotal"></span>
+//       </div>
+//     `,
+//     width: 500,
+//     confirmButtonText: "Pay Now 💳",
+//     showCancelButton: true,
+//     cancelButtonText: "Back to Homepage"
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       // Payment successful (you can integrate payment gateway here)
+//       Swal.fire({
+//         title: "Payment Successful ✅",
+//         icon: "success",
+//         timer: 1500,
+//         showConfirmButton: false
+//       });
+//       // Clear cart after payment
+//       cart = [];
+//       localStorage.setItem("cart", JSON.stringify(cart));
+//       updateCartUI();
+//       displayProducts(products);
+//     } else if (result.dismiss === Swal.DismissReason.cancel) {
+//       // Back to homepage
+//       window.location.href = "/"; // replace with your homepage URL
+//     }
+//   });
+
+//   setTimeout(renderCart, 100);
+// }
+function openCart() {
   if (cart.length === 0) {
-    Swal.fire("Cart is Empty 🛒")
-    return
+    Swal.fire({
+      title: "Cart is Empty 🛒",
+      text: "Start Shopping 😄",
+      icon: "info",
+      confirmButtonText: "Back to Homepage"
+    }).then(() => {
+      window.location.href = "/"; // go to homepage
+    });
+    return; // ✅ stop here, do not proceed to payment
   }
+
+  let total = cart.reduce((sum, item) => sum + Math.round(item.price * INR_RATE) * item.qty, 0);
 
   Swal.fire({
     title: "Your Cart 🛒",
     html: `
       <div id="cartContent" class="text-left max-h-80 overflow-y-auto"></div>
       <div class="mt-4 text-right font-bold">
-        Total: <span id="cartTotal"></span>
+        Total: <span id="cartTotal">₹${total}</span>
       </div>
     `,
     width: 500,
-    confirmButtonText: "Pay Now 💳"
-  })
+    confirmButtonText: "Pay Now 💳",
+    showCancelButton: true,
+    cancelButtonText: "Back to Homepage"
+  }).then((result) => {
+    // ✅ Check again if cart is empty before payment
+    if (cart.length === 0 || total === 0) {
+      Swal.fire({
+        title: "Cart is Empty ⛔",
+        text: "Cannot proceed with payment",
+        icon: "error",
+        timer: 1200,
+        showConfirmButton: false
+      });
+      return;
+    }
 
-  setTimeout(renderCart, 100)
+    if (result.isConfirmed) {
+      // Payment successful
+      Swal.fire({
+        title: "Payment Successful ✅",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartUI();
+      displayProducts(products);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      window.location.href = "/"; // back to homepage
+    }
+  });
+
+  setTimeout(renderCart, 100);
 }
 
 // ================= RENDER CART =================
@@ -471,23 +582,70 @@ function renderCart() {
   document.getElementById("cartTotal").innerText = "₹" + total
 }
 
+let selectedCategory = "all";
+// ====================FILTER FUNCTION ===========
+
+function filterProducts() {
+  let filtered = [...products];
+
+  // 1️⃣ Category
+  if (selectedCategory !== "all") {
+    filtered = filtered.filter(p => p.category === selectedCategory);
+  }
+
+  // 2️⃣ Price
+  const price = document.getElementById("priceFilter")?.value;
+  if (price === "low") filtered = filtered.filter(p => p.price * INR_RATE < 1000);
+  else if (price === "mid") filtered = filtered.filter(p => p.price * INR_RATE >= 1000 && p.price * INR_RATE <= 3000);
+  else if (price === "high") filtered = filtered.filter(p => p.price * INR_RATE > 3000);
+
+  // 3️⃣ Search
+  const search = document.getElementById("searchInput")?.value.toLowerCase();
+  if (search) filtered = filtered.filter(p => p.title.toLowerCase().includes(search));
+
+  displayProducts(filtered);
+}
+
+//Event Listener@filter
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Highlight selected button
+    document.querySelectorAll(".filter-btn").forEach(b =>
+      b.classList.remove("bg-[#073a7a]", "text-white")
+    );
+    btn.classList.add("bg-[#073a7a]", "text-white");
+
+    // Set selected category and filter
+    selectedCategory = btn.dataset.category;
+    filterProducts();
+  });
+});
+
 // ================= EVENT DELEGATION (NO RELOAD) =================
+
 document.addEventListener("click", function(e) {
 
+  let needToRefreshProducts = false;
+
   if (e.target.classList.contains("inc-btn")) {
-    const i = e.target.dataset.i
-    cart[i].qty++
+    const i = e.target.dataset.i;
+    cart[i].qty++;
   }
 
   if (e.target.classList.contains("dec-btn")) {
-    const i = e.target.dataset.i
-    if (cart[i].qty > 1) cart[i].qty--
-    else cart.splice(i, 1)
+    const i = e.target.dataset.i;
+    if (cart[i].qty > 1) cart[i].qty--;
+    else {
+      cart.splice(i, 1);
+      needToRefreshProducts = true; // product removed, button should revert
+    }
   }
 
   if (e.target.classList.contains("del-btn")) {
-    const i = e.target.dataset.i
-    cart.splice(i, 1)
+    const i = e.target.dataset.i;
+    cart.splice(i, 1);
+    needToRefreshProducts = true; // product removed
   }
 
   if (
@@ -495,12 +653,19 @@ document.addEventListener("click", function(e) {
     e.target.classList.contains("dec-btn") ||
     e.target.classList.contains("del-btn")
   ) {
-    localStorage.setItem("cart", JSON.stringify(cart))
-    updateCartUI()
-    renderCart()
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartUI();
+    renderCart();
+
+    // 🔹 Refresh product buttons to reflect cart changes
+    if (needToRefreshProducts) {
+      displayProducts(products);
+    }
   }
 
-})
+});
 
 // ================= EVENTS =================
 document.getElementById("cartBtn").addEventListener("click", openCart)
+document.getElementById("priceFilter").addEventListener("change", filterProducts); //Price
+document.getElementById("searchInput").addEventListener("input", filterProducts); //Search
