@@ -16,9 +16,13 @@
 <header class="sticky top-0 z-50 bg-[#073a7a] text-white shadow-md">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
 
-    <h1 class="text-2xl font-bold">EasyShop</h1>
+    <!-- <h1 class="text-2xl font-bold">EasyShop</h1> -->
+     <h1 class="text-2xl font-bold flex items-center gap-2">
+     <i class="fa-solid fa-bag-shopping"></i>
+  EasyShop
+    </h1>
 
-    <nav class="class=hidden md:flex gap-8 text-lg font-semibold">
+    <nav class="hidden md:flex gap-8 text-lg font-semibold">
       <a href="#home" class="hover:text-gray-300">Home</a>
       <a href="#about" class="hover:text-gray-300">About</a>
       <a href="#contact" class="hover:text-gray-300">Contact</a>
@@ -33,6 +37,7 @@
 </header>
 
 <!-- Home -->
+
 <section class="text-center py-12 px-4" id="home">
 
   <h2 class="text-4xl font-bold text-[#073a7a] mb-3">
@@ -43,7 +48,12 @@
     Premium products curated for you
   </p>
 
-  <div class="max-w-xl mx-auto">
+</section>
+
+<div class="sticky top-[70px] z-40 bg-white shadow-md py-4">
+
+  <!-- Search -->
+  <div class="max-w-xl mx-auto px-4 mb-4">
     <input 
       id="searchInput"
       type="search"
@@ -53,37 +63,33 @@
     >
   </div>
 
-</section>
 
+<!-- Filters -->
+<div class="max-w-5xl mx-auto px-4">
+    <div class="flex flex-wrap gap-3 justify-center">
 
-<!-- filter Bar-->
-<div class="max-w-5xl mx-auto bg-white p-4 rounded-2xl ">
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="all">All</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="electronics">Electronics</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="men's clothing">Fashion</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="jewelery">Accessories</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="women's clothing">Women</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="home">Home Appliances</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a]" data-category="books">Book</button>
 
-  <div class="flex flex-wrap gap-3 justify-center">
+      <select 
+        id="priceFilter" 
+        class="px-4 py-2 rounded-full border border-gray-300 bg-white">
+        <option value="all">All Prices</option>
+        <option value="low">Below ₹1000</option>
+        <option value="mid">₹1000 - ₹3000</option>
+        <option value="high">Above ₹3000</option>
+      </select>
 
-    <!-- Category -->
-    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="all">All</button>
-    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="electronics">Electronics</button>
-    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="men's clothing">Fashion</button>
-    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="jewelery">Accessories</button>
-    <button class="filter-btn px-4 py-2 rounded-full border border-[#073a7a] text-[#073a7a] hover:bg-[#073a7a] hover:text-white transition" data-category="women's clothing">Women</button>
-
-    <!-- Price -->
-    <select 
-  id="priceFilter" 
-  class="appearance-none px-4 py-2 rounded-full border border-gray-300 
-         text-gray-700 bg-white shadow-sm 
-         focus:ring-2 focus:ring-[#073a7a] focus:border-[#073a7a]
-         cursor-pointer transition">
-      <option value="all">All Prices</option>
-      <option value="low">Below ₹1000</option>
-      <option value="mid">₹1000 - ₹3000</option>
-      <option value="high">Above ₹3000</option>
-    </select>
-
+    </div>
   </div>
 
 </div>
+
 
 <!--  Product -->
 <div id="productContainer" 
@@ -91,7 +97,7 @@
 </div>
 
 <!--  About Us-->
-<section id="about" class="max-w-4xl mx-auto px-6 py-16 text-center">
+<section id="about" class="max-w-4xl mx-auto px-6 py-16 text-center scroll-mt-40">
   <h2 class="text-3xl md:text-4xl font-bold text-[#073a7a] mb-4">
     About EasyShop
   </h2>
@@ -105,12 +111,12 @@
 </section>
 
 <!-- contact us -->
-<section id="contact" class="bg-[#073a7a] text-white py-14 px-6">
+<section id="contact" class="bg-[#073a7a] text-white py-14 px-6 scroll-mt-40">
   <h2 class="text-3xl font-bold text-center mb-10">Contact Us</h2>
 
   <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
     
-    <!-- LEFT SIDE -->
+    
     <div class="text-left space-y-3">
       <h3 class="text-xl font-semibold mb-4">Get in Touch</h3>
       <p>Email: service@easyshop.com</p>
@@ -118,7 +124,7 @@
       <p>Website: www.easyshop.com</p>
     </div>
 
-    <!-- RIGHT SIDE -->
+    
     <div class="text-center md:text-left">
       
       <h3 class="text-xl font-semibold mb-4">Connect With Us</h3>
