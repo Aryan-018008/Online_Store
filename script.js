@@ -410,78 +410,6 @@ function updateCartUI() {
 }
 
 // ================= OPEN CART =================
-// function openCart() {
-
-//   if (cart.length === 0) {
-//     Swal.fire("Cart is Empty 🛒",
-//       "Start Shopping 😄"
-//     )
-//     return
-//   }
-
-//   Swal.fire({
-//     title: "Your Cart 🛒",
-//     html: `
-//       <div id="cartContent" class="text-left max-h-80 overflow-y-auto"></div>
-//       <div class="mt-4 text-right font-bold">
-//         Total: <span id="cartTotal"></span>
-//       </div>
-//     `,
-//     width: 500,
-//     confirmButtonText: "Pay Now 💳"
-//   })
-
-//   setTimeout(renderCart, 100)
-// }
-
-// function openCart() {
-//   if (cart.length === 0) {
-//     Swal.fire({
-//       title: "Cart is Empty 🛒",
-//       text: "Start Shopping 😄",
-//       icon: "info",
-//       confirmButtonText: "Back to Homepage"
-//     }).then(() => {
-//       // Redirect or reload homepage
-//       window.location.href = "/"; // replace with your homepage URL if needed
-//     });
-//     return;
-//   }
-
-//   Swal.fire({
-//     title: "Your Cart 🛒",
-//     html: `
-//       <div id="cartContent" class="text-left max-h-80 overflow-y-auto"></div>
-//       <div class="mt-4 text-right font-bold">
-//         Total: <span id="cartTotal"></span>
-//       </div>
-//     `,
-//     width: 500,
-//     confirmButtonText: "Pay Now 💳",
-//     showCancelButton: true,
-//     cancelButtonText: "Back to Homepage"
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       // Payment successful (you can integrate payment gateway here)
-//       Swal.fire({
-//         title: "Payment Successful ✅",
-//         icon: "success",
-//         timer: 1500,
-//         showConfirmButton: false
-//       });
-//       // Clear cart after payment
-//       cart = [];
-//       localStorage.setItem("cart", JSON.stringify(cart));
-//       updateCartUI();
-//       displayProducts(products);
-//     } else if (result.dismiss === Swal.DismissReason.cancel) {
-//       // Back to homepage
-//       window.location.href = "/"; // replace with your homepage URL
-//     }
-//   });
-
-//   setTimeout(renderCart, 100);
-// }
 function openCart() {
   if (cart.length === 0) {
     Swal.fire({
@@ -542,6 +470,7 @@ function openCart() {
 
   setTimeout(renderCart, 100);
 }
+
 
 // ================= RENDER CART =================
 function renderCart() {
