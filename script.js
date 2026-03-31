@@ -6,7 +6,7 @@ let products = []
 
 async function getProducts() {
   const res = await fetch(API_URL)
-  const data = await res.json()   // ✅ store in data
+  const data = await res.json()   
 
   const customProducts = [
     {
@@ -89,7 +89,7 @@ async function getProducts() {
 getProducts()
 // resetCategoryUI()
 
-// ================= CART =================
+// Cart 
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 // clean invalid data
@@ -98,7 +98,7 @@ localStorage.setItem("cart", JSON.stringify(cart))
 
 updateCartUI()
 
-// ================= DISPLAY PRODUCTS =================
+//   Product card display 
 const container = document.getElementById("productContainer")
 
 function displayProducts(data) {
@@ -147,7 +147,7 @@ function displayProducts(data) {
   })
 }
 
-// ================= ADD TO CART =================
+// add 2 cart
 function addToCart(product) {
 
   const existing = cart.find(item => item.id === product.id)
@@ -173,13 +173,13 @@ function addToCart(product) {
   })
 }
 
-// ================= CART COUNT =================
+
 function updateCartUI() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0)
   document.getElementById("cartCount").innerText = totalItems
 }
 
-// ================= OPEN CART =================
+// cart popUp 
 function openCart() {
   if (cart.length === 0) {
     Swal.fire({
@@ -188,9 +188,9 @@ function openCart() {
       icon: "info",
       confirmButtonText: "Back to Homepage"
     }).then(() => {
-      window.location.href = "/"; // go to homepage
+      window.location.href = "index.html"; 
     });
-    return; // ✅ stop here, do not proceed to payment
+    return; 
   }
 
   let total = cart.reduce((sum, item) => sum + Math.round(item.price * INR_RATE) * item.qty, 0);
@@ -208,7 +208,7 @@ function openCart() {
     showCancelButton: true,
     cancelButtonText: "Back to Homepage"
   }).then((result) => {
-    // ✅ Check again if cart is empty before payment
+    
     if (cart.length === 0 || total === 0) {
       Swal.fire({
         title: "Cart is Empty ⛔",
@@ -221,7 +221,7 @@ function openCart() {
     }
 
     if (result.isConfirmed) {
-      // Payment successful
+      
       Swal.fire({
         title: "Payment Successful ✅",
         icon: "success",
@@ -234,7 +234,7 @@ function openCart() {
       updateCartUI();
       displayProducts(products);
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-      window.location.href = "/"; // back to homepage
+      window.location.href = "/"; 
     }
   });
 
@@ -242,7 +242,7 @@ function openCart() {
 }
 
 
-// ================= RENDER CART =================
+// Product's Cart Rendering
 function renderCart() {
   let total = 0
 
@@ -282,23 +282,23 @@ function renderCart() {
 }
 
 let selectedCategory = "all";
-// ====================FILTER FUNCTION ===========
+// Product Filter 
 
 function filterProducts() {
   let filtered = [...products];
 
-  // 1️⃣ Category
+  //  Category
   if (selectedCategory !== "all") {
     filtered = filtered.filter(p => p.category === selectedCategory);
   }
 
-  // 2️⃣ Price
+  //  Price
   const price = document.getElementById("priceFilter")?.value;
   if (price === "low") filtered = filtered.filter(p => p.price * INR_RATE < 1000);
   else if (price === "mid") filtered = filtered.filter(p => p.price * INR_RATE >= 1000 && p.price * INR_RATE <= 3000);
   else if (price === "high") filtered = filtered.filter(p => p.price * INR_RATE > 3000);
 
-  // 3️⃣ Search
+  //  Search
   const search = document.getElementById("searchInput")?.value.toLowerCase();
   if (search) filtered = filtered.filter(p => p.title.toLowerCase().includes(search));
 
@@ -309,13 +309,13 @@ function filterProducts() {
 
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    // Highlight selected button
-    document.querySelectorAll(".filter-btn").forEach(b =>
+    
+    document.querySelectorAll(".filter-btn").forEach(b =>  //Highlight
       b.classList.remove("bg-[#073a7a]", "text-white")
     );
     btn.classList.add("bg-[#073a7a]", "text-white");
 
-    // Set selected category and filter
+    
     selectedCategory = btn.dataset.category;
     filterProducts();
   });
@@ -336,7 +336,7 @@ function resetCategoryUI() {
     allBtn.classList.add("bg-[#073a7a]", "text-white")
   }
 }
-// ================= EVENT DELEGATION (NO RELOAD) =================
+// No Reload
 
 document.addEventListener("click", function(e) {
 
@@ -352,14 +352,14 @@ document.addEventListener("click", function(e) {
     if (cart[i].qty > 1) cart[i].qty--;
     else {
       cart.splice(i, 1);
-      needToRefreshProducts = true; // product removed, button should revert
+      needToRefreshProducts = true; 
     }
   }
 
   if (e.target.classList.contains("del-btn")) {
     const i = e.target.dataset.i;
     cart.splice(i, 1);
-    needToRefreshProducts = true; // product removed
+    needToRefreshProducts = true; 
   }
 
   if (
@@ -371,7 +371,7 @@ document.addEventListener("click", function(e) {
     updateCartUI();
     renderCart();
 
-    // 🔹 Refresh product buttons to reflect cart changes
+    
     if (needToRefreshProducts) {
       displayProducts(products);
     }
@@ -379,7 +379,7 @@ document.addEventListener("click", function(e) {
 
 });
 
-// ================= EVENTS =================
-document.getElementById("cartBtn").addEventListener("click", openCart)
+
+document.getElementById("cartBtn").addEventListener("click", openCart) //Cart PopUp Open
 document.getElementById("priceFilter").addEventListener("change", filterProducts); //Price
 document.getElementById("searchInput").addEventListener("input", filterProducts); //Search
