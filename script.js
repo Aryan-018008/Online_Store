@@ -1,6 +1,6 @@
 // Api
 const API_URL = "https://fakestoreapi.com/products"
-const INR_RATE = 85
+const INR_RATE = 90
 
 let products = []
 
